@@ -1,0 +1,1821 @@
+openapi: 3.0.0
+info:
+  title: Cloud Defense
+  version: 1.0.0
+servers:
+  - url: https://staging.clouddefenseai.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    noauthAuth:
+      type: http
+      scheme: noauth
+tags:
+  - name: Github Integration
+    description: "APIs for github integrations including adding/deleting/fetching repositories"
+  - name: Gitlab Integration
+    description: "APIs for gitlab integrations including adding/deleting/fetching repositories"
+  - name: Azure Integration
+    description: "APIs for azure integrations including adding/deleting/fetching repositories"
+  - name: Docker Hub Integration
+    description: "APIs for docker hub integrations including adding/deleting/fetching repositories"
+  - name: Unauthenticated APIs
+    description: "Scan APIs without authentication"
+  - name: OnlineScan
+  - name: Dashboard APIs
+    description: "APIs for returning graphical representation of data in dashboard"
+  - name: Application APIs
+    description: "Fetch applications and scan history APIs"
+  - name: Auth-Service APIs
+    description: "APIs for login/signup/password change etc"
+  - name: License upload
+  - name: Integration APIs
+    description: "APIs to enable different integrations"
+  - name: Slack Integration
+    description: "Crud APIs for slack integraton"
+  - name: JIRA INTEGRATION
+    description: "Crud APIs for jira integraton"
+  - name: Service now Integration
+    description: "Crud APIs for service now integraton"
+  - name: Azure boards Integration
+    description: "Crud APIs for azure boards integraton"
+  - name: Microsoft teams Integration
+    description: "Crud APIs for microsoft teams integraton"
+paths:
+  /integration/github/repositories:
+    get:
+      tags:
+        - Github Integration
+      summary: List all the github repos
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          example: '1854849920'
+        - name: number
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: size
+          in: query
+          schema:
+            type: integer
+          example: '50'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/github/enterprise/repositories:
+    get:
+      tags:
+        - Github Integration
+      summary: List all the github enterprise repositories
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: number
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: size
+          in: query
+          schema:
+            type: integer
+          example: '50'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/github/extract:
+    get:
+      tags:
+        - Github Integration
+      summary: Get extract repository data
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/github/enterprise:
+    post:
+      tags:
+        - Github Integration
+      summary: Create enterprise integration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                enterpriseLink: ''
+                token: ''
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/github:
+    delete:
+      tags:
+        - Github Integration
+      summary: Delete github integration
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/gitlab/repositories:
+    get:
+      tags:
+        - Azure Integration
+      summary: Azure Repos
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          example: '1854849920'
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: size
+          in: query
+          schema:
+            type: integer
+          example: '50'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/gitlab/enterprise:
+    post:
+      tags:
+        - Azure Integration
+      summary: Add Integration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                enterpriseLink: ''
+                token: ''
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/gitlab/enterprise/repositories:
+    get:
+      tags:
+        - Gitlab Integration
+      summary: Gitlab Enterprise Repo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: size
+          in: query
+          schema:
+            type: integer
+          example: '50'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/dockerhub/repositories:
+    get:
+      tags:
+        - Docker Hub Integration
+      summary: Fetch Repositories
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          example: '1854849920'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/dockerhub/tags:
+    get:
+      tags:
+        - Docker Hub Integration
+      summary: Fetch Repositories Tags
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+          example: '1854849920'
+        - name: repository
+          in: query
+          schema:
+            type: string
+          example: repolink
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/dockerhub:
+    post:
+      tags:
+        - Docker Hub Integration
+      summary: Add dockerhub Integration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: abcd
+                accessToken: token
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: USER_ID
+          in: header
+          schema:
+            type: string
+          example: useridvalue
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/generateId:
+    get:
+      tags:
+        - Unauthenticated APIs
+      summary: generateId
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/vulnerabilityByAge:
+    get:
+      tags:
+        - Unauthenticated APIs
+      summary: Scan Vulnerability By Age
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: string
+        - name: START_DATE
+          in: header
+          schema:
+            type: string
+        - name: END_DATE
+          in: header
+          schema:
+            type: string
+        - name: SEVERITY
+          in: header
+          schema:
+            type: string
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/public/api/scan-histories:
+    get:
+      tags:
+        - Unauthenticated APIs
+      summary: Public scan histories
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: CLOUDDEFENSE_API_KEY
+          in: header
+          schema:
+            type: string
+        - name: applicationId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/rescan:
+    get:
+      tags:
+        - Unauthenticated APIs
+      summary: Rescan
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: SCAN_HISTORY_ID
+          in: header
+          schema:
+            type: string
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: string
+        - name: CLOUDDEFENSE_API_KEY
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /processAndSave:
+    post:
+      tags:
+        - Unauthenticated APIs
+      summary: Process and save
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                filePath: ''
+                scanTime: ''
+                sourceCodeSecrets: []
+                dependencies: []
+                baseProjectInfo:
+                  id: ''
+                  name: ''
+                  applicationType: Container
+                  description: ''
+                  projectUrl: ''
+                  artifactName: ''
+                  buildDirectory: ''
+                  artifactType: ''
+                  programmingLanguage: ''
+                  tag: ''
+                scanSource: SCA
+                scanRequestType: FOR_SERVER_SIDE_OWASP_SCAN
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: CLOUDDEFENSE_API_KEY
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/sast:
+    post:
+      tags:
+        - Unauthenticated APIs
+      summary: Scan results
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: CLOUDDEFENSE_API_KEY
+          in: header
+          schema:
+            type: string
+        - name: SCAN_TOOL
+          in: header
+          schema:
+            type: string
+        - name: APP_NAME
+          in: header
+          schema:
+            type: string
+        - name: PROGRAMMING_LANGUAGE
+          in: header
+          schema:
+            type: string
+        - name: TAG
+          in: header
+          schema:
+            type: string
+        - name: SCAN_TIME
+          in: header
+          schema:
+            type: string
+        - name: FILES_MAP
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/trial/email:
+    post:
+      tags:
+        - Unauthenticated APIs
+      summary: Scan trial email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: ''
+                jobs: []
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/trial/status:
+    post:
+      tags:
+        - Unauthenticated APIs
+      summary: Scan trial status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: ''
+                jobs: []
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/repo:
+    post:
+      tags:
+        - OnlineScan
+      summary: scan repo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                - repoUrl: https://github.com/Sheeren-Caw/movie.git
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: clouddefense_api_key
+          in: header
+          schema:
+            type: string
+          example: 67c72335-a72c-410c-b5e0-59c1e029291a
+        - name: organization_id
+          in: header
+          schema:
+            type: integer
+          example: '1854849920'
+        - name: scan_type
+          in: header
+          schema:
+            type: string
+          example: FULL
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/dashboard/bubble:
+    get:
+      tags:
+        - Dashboard APIs
+      summary: Bubble
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/dashboard/distribution:
+    get:
+      tags:
+        - Dashboard APIs
+      summary: Distribution
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/dashboard/by-age:
+    get:
+      tags:
+        - Dashboard APIs
+      summary: By age
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/dashboard/trend/severity:
+    get:
+      tags:
+        - Dashboard APIs
+      summary: Trend severity
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/dashboard/trend/type:
+    get:
+      tags:
+        - Dashboard APIs
+      summary: Trend type
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/dashboard/top-cve:
+    get:
+      tags:
+        - Dashboard APIs
+      summary: Top CVE
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/application:
+    get:
+      tags:
+        - Application APIs
+      summary: Get Applications
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: teamId
+          in: query
+          schema:
+            type: integer
+          example: '1854849920'
+        - name: isAscending
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: size
+          in: query
+          schema:
+            type: integer
+          example: '50'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/application/601096768/scan-history:
+    get:
+      tags:
+        - Application APIs
+      summary: Application Scan History
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ID_TYPE
+          in: header
+          schema:
+            type: string
+          example: application
+        - name: onlyVulnerable
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/login:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Login Email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: Sheeren@cawstudios.com
+                password: Hello@123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/signup:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: Shhh
+                email: sheeren@cawstudios.com
+                password: Hello@123
+                organization: caw studios
+                firstname: sheeren
+                lastname: farooqui
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/users/deactivate/novah84900@doerma.com:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Deactivate user
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/users/activate/abc@yopmail.com:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Activate user
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/self-activate/user:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Self-activate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: sidov76796@iconzap.com
+                invitationId: 6a7701e0-33d7-4970-95de-8c5b9945ec71
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/update-password:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Update password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                password: Hello@123
+                currentPassword: Hello@123
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/forgot-password:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Forgot password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: Sheeren@cawstudios.com
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/change-password:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Change password on forgot password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: sheeren@cawstudios.com
+                invitationId: d7706bf9-5ecf-468d-b2ec-894ca4d1aae6
+                password: Hello@123@123
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/reset-password:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Reset password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                password: Hello@123
+                email: cetire6909@dilanfa.com
+                invitationId: 6385b99a-2e57-45de-a9cc-737974e8f6ae
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/users:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: invite user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                userRole: APPUSER
+                orgName: caw studios
+                orgId: 566207104
+                email: dawimam610@dilanfa.com
+                teamIds:
+                  - 566207104
+                  - 965763840
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/users/rakorap511@falkyz.com:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Update user email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                orgName: caw studio12
+                email: abcd12kj@gmail.com
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/users/test89@gmail.com:
+    get:
+      tags:
+        - Auth-Service APIs
+      summary: Get user details
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/users/pstest6967+33213@gmail.com:
+    delete:
+      tags:
+        - Auth-Service APIs
+      summary: Delete user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cd-auth/organization/caw studios:
+    post:
+      tags:
+        - Auth-Service APIs
+      summary: Update organziation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                orgName: caw studios
+                contactEmail: sheeren@cawstudios.com
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/license:
+    post:
+      tags:
+        - License upload
+      summary: Upload License
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      parameters:
+        - name: LICENSE_ID
+          in: header
+          schema:
+            type: string
+        - name: POLICY_ID
+          in: header
+          schema:
+            type: string
+        - name: USER_ID
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/slack:
+    post:
+      tags:
+        - Slack Integration
+      summary: Insert Slack Entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: ORGANIZATION_NAME
+          in: header
+          schema:
+            type: string
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Slack Integration
+      summary: Update Slack Entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+        - name: ORGANIZATION_NAME
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Slack Integration
+      summary: Delete Slack Entry
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Slack Integration
+      summary: Get slack entry
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/jira/config:
+    post:
+      tags:
+        - JIRA INTEGRATION
+      summary: Add Jira Configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - JIRA INTEGRATION
+      summary: Update Jira Configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - JIRA INTEGRATION
+      summary: Retrieve Jira Configuration
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - JIRA INTEGRATION
+      summary: Delete Jira Configuration
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/jira/ticket:
+    post:
+      tags:
+        - JIRA INTEGRATION
+      summary: Create JIRA ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/servicenow/config:
+    get:
+      tags:
+        - Service now Integration
+      summary: Get service now config
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Service now Integration
+      summary: Add service now config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: ''
+                password: ''
+                domain: ''
+                projectKey: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Service now Integration
+      summary: Update service now config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: ''
+                password: ''
+                domain: ''
+                projectKey: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+        - name: INTEGRATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Service now Integration
+      summary: Delete service now config
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/servicenow/ticket:
+    post:
+      tags:
+        - Service now Integration
+      summary: Create service now ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/azureboards/config:
+    get:
+      tags:
+        - Azure boards Integration
+      summary: Get azure board config
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Azure boards Integration
+      summary: Add azure board config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: ''
+                password: ''
+                organization: ''
+                project: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Azure boards Integration
+      summary: Update azure board config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: ''
+                password: ''
+                organization: ''
+                project: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+        - name: INTEGRATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Azure boards Integration
+      summary: Delete azure board config
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/azureboards/ticket:
+    post:
+      tags:
+        - Azure boards Integration
+      summary: Create azure board ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/microsoft-teams/config:
+    get:
+      tags:
+        - Microsoft teams Integration
+      summary: Get microsoft teams config
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Microsoft teams Integration
+      summary: Add microsoft teams config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: ''
+                WebHookUri: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+        - name: ORGANIZATION_NAME
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Microsoft teams Integration
+      summary: Update microsoft teams config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: ''
+                WebHookUri: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+        - name: INTEGRATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Microsoft teams Integration
+      summary: Delete microsoft teams config
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/slack/enable:
+    post:
+      tags:
+        - Integration APIs
+      summary: Enable slack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/jira/enable:
+    post:
+      tags:
+        - Integration APIs
+      summary: Enable Jira
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/servicenow/enable:
+    post:
+      tags:
+        - Integration APIs
+      summary: Enable service now
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/azureboards/enable:
+    post:
+      tags:
+        - Integration APIs
+      summary: Enable azureboards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /integration/microsoft-teams/enable:
+    post:
+      tags:
+        - Integration APIs
+      summary: Enable microsoft teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ORGANIZATION_ID
+          in: header
+          schema:
+            type: integer
+        - name: TEAM_ID
+          in: header
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/repofile:
+    get:
+      tags:
+        - General
+      summary: Scan repo file
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: CLOUDDEFENSE_API_KEY
+          in: header
+          schema:
+            type: string
+        - name: url
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/sast-rule:
+    get:
+      tags:
+        - General
+      summary: Get SAST rules
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: language
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - General
+      summary: Create SAST rules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 123
+                severity: ''
+                languageApplicable: ''
+                applicationId: ''
+                isEnabled: true
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /scan/scan-history/scanned-users:
+    get:
+      tags:
+        - General
+      summary: Get Latest Scanned User
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/scan-history/123/sca:
+    get:
+      tags:
+        - General
+      summary: Get SCA issues
+      parameters:
+        - name: isFixable
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: severity
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: '10'
+        - name: offset
+          in: query
+          schema:
+            type: integer
+          example: '50'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/secret:
+    get:
+      tags:
+        - General
+      summary: Get Secrets
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
